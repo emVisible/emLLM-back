@@ -32,14 +32,14 @@ def run():
         uvicorn.run(
             "main:app",
             host="127.0.0.1",
-            port=dotenv_values(".env").get("PORT"),
+            port=int(dotenv_values(".env").get("PORT")),
             reload=True,
         )
 
     elif mode == "PRODUCTION":
         import uvicorn
 
-        uvicorn.run("main:app", host="0.0.0.0", port=dotenv_values(".env").get("PORT"))
+        uvicorn.run("main:app", host="0.0.0.0", port=int(dotenv_values(".env").get("PORT")))
     else:
         raise RuntimeError("Please check the .env file.")
 
