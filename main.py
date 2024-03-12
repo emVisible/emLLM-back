@@ -16,7 +16,7 @@ app.include_router(route)
 app.add_middleware(CORSMiddleware, allow_origins=origins)
 
 
-@app.get("/")
+@app.get("/api")
 def root_page():
     return {"ZISU-LLM": "Hello World!"}
 

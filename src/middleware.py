@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # from time import time
 
 # 后端跨域白名单
-origins = ["http://127.0.0.1:5173", "http://127.0.0.1:3000"]
+origins = ["http://127.0.0.1:5173"]
 
 # 示例: 在全局请求添加X-Process-Time header头, value为路由用时
 # class TimeMiddleWare(BaseHTTPMiddleware):
