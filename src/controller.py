@@ -134,4 +134,5 @@ async def login_for_access_token(
 async def check_current_user(
     user: schemas.User = Depends(get_current_active_user),
 ):
+    print(user.name)
     return user
