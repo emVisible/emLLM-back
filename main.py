@@ -4,14 +4,26 @@ from src.models import Base
 from src.controller import route
 from fastapi import FastAPI
 from dotenv import dotenv_values
+from contextlib import asynccontextmanager
+from src.llm.api_server import llm_route, run_llm
+import torch
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+        torch.cuda.ipc_collect()
 
 
 # 初始化数据库
 Base.metadata.create_all(bind=engine)
 # 初始化app实例
-app = FastAPI(title="ZISU-LLM", version="1.0.0")
+app = FastAPI(title="ZISU-LLM", version="1.0.0", lifespan=lifespan)
 # 导入路由
 app.include_router(route)
+app.include_router(llm_route)
 # 跨域中间件
 app.add_middleware(CORSMiddleware, allow_origins=origins)
 
@@ -39,7 +51,9 @@ def run():
     elif mode == "PRODUCTION":
         import uvicorn
 
-        uvicorn.run("main:app", host="0.0.0.0", port=int(dotenv_values(".env").get("PORT")))
+        uvicorn.run(
+            "main:app", host="0.0.0.0", port=int(dotenv_values(".env").get("PORT"))
+        )
     else:
         raise RuntimeError("Please check the .env file.")
 
