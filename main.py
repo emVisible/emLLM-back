@@ -23,7 +23,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(title="ZISU-LLM", version="1.0.0", lifespan=lifespan)
 # 导入路由
 app.include_router(route)
-app.include_router(llm_route)
+app.include_router(llm_route, prefix="/api")
 # 跨域中间件
 app.add_middleware(CORSMiddleware, allow_origins=origins)
 
