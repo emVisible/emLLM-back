@@ -3,6 +3,7 @@ from src.middleware import CORSMiddleware, origins
 from src.models import Base
 from src.controller import route
 from fastapi import FastAPI
+from fastapi.openapi.docs import get_swagger_ui_html
 from dotenv import dotenv_values
 from contextlib import asynccontextmanager
 from src.llm.api_server import llm_route, run_llm
@@ -15,6 +16,15 @@ async def lifespan(app: FastAPI):
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
         torch.cuda.ipc_collect()
+
+
+def swagger_monkey_patch(*args, **kwargs):
+    return get_swagger_ui_html(
+        *args,
+        **kwargs,
+        swagger_js_url="https://cdn.bootcdn.net/ajax/libs/swaqqer-ui/5.6.2/swagqer-ui-bundle.js",
+        swagger_css_url="https://cdn.bootcdn.net/ajax/libs/swagger-ui/5.6.2/swagger-ui.min.css"
+    )
 
 
 # 初始化数据库
