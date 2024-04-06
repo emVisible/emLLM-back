@@ -1,12 +1,14 @@
-from src.database import engine
-from src.middleware import CORSMiddleware, origins
-from src.models import Base
-from src.controller import route
+from src.base.database import engine
+from src.base.middleware import CORSMiddleware, origins
+from src.base.models import Base
+from src.base.controller import route
+from run_finetune import finetune_route
+from run_crawl import crawl_route
 from fastapi import FastAPI
 from fastapi.openapi.docs import get_swagger_ui_html
 from dotenv import dotenv_values
 from contextlib import asynccontextmanager
-from src.llm.api_server import llm_route, run_llm
+from src.api.api_server import llm_route, run_llm
 import torch
 
 
@@ -34,6 +36,8 @@ app = FastAPI(title="ZISU-LLM", version="1.0.0", lifespan=lifespan)
 # 导入路由
 app.include_router(route)
 app.include_router(llm_route, prefix="/api")
+app.include_router(finetune_route, prefix="/api")
+app.include_router(crawl_route, prefix="/api")
 # 跨域中间件
 app.add_middleware(CORSMiddleware, allow_origins=origins)
 

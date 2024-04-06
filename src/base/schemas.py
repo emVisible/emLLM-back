@@ -69,3 +69,7 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: str
+
+class Crawl(BaseModel):
+    city: str
+    amount: int

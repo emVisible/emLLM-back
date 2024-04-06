@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from hashlib import md5
 
 from . import models, schemas
 
