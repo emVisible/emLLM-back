@@ -1,25 +1,30 @@
 import os
 from fastapi import APIRouter
+from src.base.schemas import FinetuneConig
 
 finetune_route = APIRouter(prefix="/llm")
-
-
 @finetune_route.post("/finetune", tags=["LLM"])
-async def fine_tune():
+async def fine_tune(finetune_config:FinetuneConig):
+    data_path = finetune_config.data_path
+    max_samples = finetune_config.max_samples
+    if max_samples <= 0 or max_samples > 1000:
+      return {"code": 400, "status": "error", "data": {}, "message": "Error: max samples设置错误"}
+    if not data_path.endswith('.json') or len(data_path) == 0:
+      return {"code": 400, "status": "error", "data": {}, "message": "Error: 微调数据文件名错误"}
     # 定义微调命令
     base_dir = "./"
     model_path = "C:/_code/store/chatglm3-6b"
-    data_name = "finetune_data"
-    max_samples = 1000
+    data_name = data_path
+    max_samples = max_samples or 1000
     command = f"""
-    python {base_dir}/run_train.py \
+    python {base_dir}run_train.py \
     --model_name_or_path {model_path or 'C:/_code/store/chatglm3-6b'} \
     --stage sft \
     --do_train True \
     --finetuning_type lora \
     --template chatglm3 \
-    --dataset_dir {base_dir}/data/finetune \
-    --dataset {data_name or 'finetune_data'} \
+    --dataset_dir {base_dir}data \
+    --dataset {data_name} \
     --cutoff_len 1024 \
     --learning_rate 5e-05 \
     --num_train_epochs 3.0 \
@@ -34,12 +39,13 @@ async def fine_tune():
     --lora_rank 8 \
     --lora_dropout 0.1 \
     --lora_target query_key_value \
-    --output_dir {base_dir}/output \
+    --output_dir {base_dir}output \
     --overwrite_output_dir True \
     --plot_loss True \
     """
     # 执行命令
     os.system(command)
+    return {"code": 200, "status": "success", "data": {}, "message": "微调完毕"}
 
 
 # fine_tune()

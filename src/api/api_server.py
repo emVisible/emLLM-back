@@ -14,15 +14,19 @@ from pydantic import BaseModel, Field
 from transformers import AutoTokenizer, AutoModel
 from src.api.utils import process_response, generate_chatglm3, generate_stream_chatglm3
 from sentence_transformers import SentenceTransformer
-
+from dotenv import get_key
 from sse_starlette.sse import EventSourceResponse
 
 # Set up limit request time
 EventSourceResponse.DEFAULT_PING_INTERVAL = 1000
 
 # set LLM path
-MODEL_PATH = os.environ.get("MODEL_PATH", "THUDM/chatglm3-6b")
-TOKENIZER_PATH = os.environ.get("TOKENIZER_PATH", MODEL_PATH)
+# MODEL_PATH = os.environ.get("MODEL_PATH", "THUDM/chatglm3-6b")
+# MODEL_PATH = os.environ.get("MODEL_PATH", "THUDM/chatglm3-6b")
+MODEL_PATH = os.path.abspath(get_key(".\.env", "MODEL_PATH"))
+r = get_key(".\.env", "MODEL_PATH")
+# TOKENIZER_PATH = os.environ.get("TOKENIZER_PATH", MODEL_PATH)
+TOKENIZER_PATH = MODEL_PATH
 
 # set Embedding Model path
 EMBEDDING_PATH = os.environ.get("EMBEDDING_PATH", "BAAI/bge-large-zh-v1.5")

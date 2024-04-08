@@ -5,7 +5,7 @@ import sys
 import dotenv
 
 base_path = dotenv.get_key(".env", "BASE_PATH")
-data_path = f"{base_path}/data/crawl"
+data_path = f"{base_path}/data"
 
 
 def main():

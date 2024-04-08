@@ -4,6 +4,8 @@ from src.base.models import Base
 from src.base.controller import route
 from run_finetune import finetune_route
 from run_crawl import crawl_route
+from run_export_model import export_route
+from run_deploy import deploy_route
 from fastapi import FastAPI
 from fastapi.openapi.docs import get_swagger_ui_html
 from dotenv import dotenv_values
@@ -38,6 +40,8 @@ app.include_router(route)
 app.include_router(llm_route, prefix="/api")
 app.include_router(finetune_route, prefix="/api")
 app.include_router(crawl_route, prefix="/api")
+app.include_router(export_route, prefix="/api")
+app.include_router(deploy_route, prefix="/api")
 # 跨域中间件
 app.add_middleware(CORSMiddleware, allow_origins=origins)
 

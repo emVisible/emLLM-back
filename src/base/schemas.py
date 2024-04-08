@@ -1,7 +1,6 @@
 from pydantic import BaseModel, EmailStr, Field
 
 
-
 class UserBase(BaseModel):
     """
     用户基类
@@ -37,6 +36,7 @@ class History(BaseModel):
     """
     历史记录类, 继承自BaseModel
     """
+
     id: int
     owner_id: int
     content: str
@@ -53,16 +53,19 @@ class User(UserBase):
       email,
       history,
     """
+
     id: int
     history: list[History] = []
 
     class Config:
         orm_mode = True
 
+
 class Token(BaseModel):
     """
     Token类
     """
+
     access_token: str
     token_type: str
 
@@ -70,6 +73,18 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     username: str
 
+
 class Crawl(BaseModel):
     city: str
     amount: int
+
+
+class FinetuneConig(BaseModel):
+    data_path: str
+    max_samples: int
+
+class ExportModel(BaseModel):
+    dir_name:str
+
+class Deploy(BaseModel):
+    name:str

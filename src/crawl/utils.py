@@ -6,11 +6,11 @@ base_path = dotenv.get_key(".env", "BASE_PATH")
 
 def get_path(city: str, suffix: str):
     if suffix == ".json":
-        return f"{base_path}/data/crawl/{city}.json"
+        return f"{base_path}/data/{city}.json"
     elif suffix == ".csv":
-        return f"{base_path}/data/crawl/{city}.csv"
+        return f"{base_path}/data/{city}.csv"
     elif suffix == "more":
-        return f"{base_path}/data/crawl/{city}_more.json"
+        return f"{base_path}/data/{city}_more.json"
     else:
         raise Exception("Error: file suffix is not expected.")
 

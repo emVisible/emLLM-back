@@ -127,13 +127,8 @@ def crawl(driver, amount, city):
                     phone = temp[2].text
                 else:
                     address = temp[0].text
-
                 temp_list = []
                 temp_list.append(address)
-                df = cpca.transform(temp_list)
-                if f"{city}" not in df.iat[0, 0] and f"{city}" not in df.iat[0, 1]:
-                    # count -= 1
-                    continue
 
                 introduct = "空"
                 open = "空"
@@ -191,7 +186,6 @@ def crawl(driver, amount, city):
                 )
             )
         ).click()
-
     return data
 
 
