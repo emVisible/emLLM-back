@@ -21,11 +21,13 @@ from sse_starlette.sse import EventSourceResponse
 EventSourceResponse.DEFAULT_PING_INTERVAL = 1000
 
 # set LLM path
-# MODEL_PATH = os.environ.get("MODEL_PATH", "THUDM/chatglm3-6b")
-# MODEL_PATH = os.environ.get("MODEL_PATH", "THUDM/chatglm3-6b")
-MODEL_PATH = os.path.abspath(get_key(".\.env", "MODEL_PATH"))
-r = get_key(".\.env", "MODEL_PATH")
-# TOKENIZER_PATH = os.environ.get("TOKENIZER_PATH", MODEL_PATH)
+MODEL_PATH = None
+path = get_key(".\.env", "MODEL_PATH")
+if not path:
+  MODEL_PATH = "THUDM/chatglm3-6b"
+else:
+  MODEL_PATH = os.path.abspath(get_key(".\.env", "MODEL_PATH"))
+
 TOKENIZER_PATH = MODEL_PATH
 
 # set Embedding Model path

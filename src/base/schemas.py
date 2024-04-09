@@ -83,8 +83,18 @@ class FinetuneConig(BaseModel):
     data_path: str
     max_samples: int
 
+
 class ExportModel(BaseModel):
-    dir_name:str
+    dir_name: str
+
 
 class Deploy(BaseModel):
-    name:str
+    name: str
+
+
+class DeployAuto(BaseModel):
+    city: str
+    amount: int
+    max_samples: int
+    dir_name: str
+    is_multi: bool

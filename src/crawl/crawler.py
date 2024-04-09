@@ -260,12 +260,14 @@ def transform_json_more(city):
                 json.dump(result, fs, ensure_ascii=False, indent=1)
 
 
-def run(city: str, amount: int):
+def run(city: str, amount: int, map_name:str):
     # 获取driver
     driver = get_driver()
 
     # 查询城市
     findCity(driver, city)
+
+    city = map_name
 
     # 采集的数据量
     amount = amount if amount is not None else 10

@@ -9,7 +9,7 @@ async def fine_tune(finetune_config:FinetuneConig):
     max_samples = finetune_config.max_samples
     if max_samples <= 0 or max_samples > 1000:
       return {"code": 400, "status": "error", "data": {}, "message": "Error: max samples设置错误"}
-    if not data_path.endswith('.json') or len(data_path) == 0:
+    if  len(data_path) == 0:
       return {"code": 400, "status": "error", "data": {}, "message": "Error: 微调数据文件名错误"}
     # 定义微调命令
     base_dir = "./"
