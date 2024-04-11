@@ -19,26 +19,29 @@
   |- output			微调后导出的模型
   |-src
   	|- api
-  		__init__
-  		api_server 基于GLM3的API服务
-  		utils	辅助功能
+		__init__
+		api_server 基于GLM3的API服务
+		utils	辅助功能
+
   	|- base
-        __init__     模块声明文件, 为空
-        controller   基础功能路由
-        database     数据库基础设置
-        models       数据库表
-        schemas      DTO
-        middleware   中间件
-        exceptions   异常处理
-        service_auth 权限服务
-        service_user 用户服务
-    |- crawl
-    	crawler		爬虫核心实现
-    	driver		selenium驱动
-    	main		爬虫入口文件
-    	utils		辅助功能
+	        __init__     模块声明文件, 为空
+	        controller   基础功能路由
+	        database     数据库基础设置
+	        models       数据库表
+	        schemas      DTO
+	        middleware   中间件
+	        exceptions   异常处理
+	        service_auth 权限服务
+	        service_user 用户服务
+
+	|- crawl
+	    	crawler		爬虫核心实现
+	    	driver		selenium驱动
+	    	main		爬虫入口文件
+	    	utils		辅助功能
+
 	|- finetune
-		...			LLaMA-Factory微调文件
+		...		LLaMA-Factory微调文件
   .env              环境变量, 用于设置全局配置变量
   .env.example      环境变量示例
   .gitignore        git忽略文件
@@ -58,9 +61,13 @@
   sql_app.db		sql文件(默认)
 ```
 
+## 项目启动
 
+### 端口转发
 
-## 依赖安装
+服务器的127.0.0.1:3000转发至本地的127.0.0.1:3000，提供给配套前端使用
+
+### 依赖安装
 
 初始开发使用Python版本为:3.11.2
 
@@ -85,7 +92,7 @@
 
 
 
-## 项目启动
+### 启动
 
 * 确认env配置无误：PORT无占用、MODE正确等
 
