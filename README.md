@@ -1,6 +1,10 @@
-# LLM-Back
+# ZISU-LLM
 
-项目后端核心基于[FastAPI]("https://fastapi.tiangolo.com/zh/")构建, 大模型部分基于[ChatGLM3](https://github.com/THUDM/ChatGLM3)以及[LLaMA-Factory]("https://github.com/hiyouga/LLaMA-Factory")构建而成
+---
+
+本项目为ZISU的大模型项目, 基于ChatGLM3对旅游信息进行垂直训练
+
+项目后端基于[FastAPI]("https://fastapi.tiangolo.com/zh/")构建, 大模型部分基于[ChatGLM3](https://github.com/THUDM/ChatGLM3)以及[LLaMA-Factory]("https://github.com/hiyouga/LLaMA-Factory")构建而成
 
 - 用户登录与注册注册、Token验证
 - 可拓展的服务端用户历史记录存储
@@ -65,19 +69,11 @@
 
 ### 端口转发
 
-服务器的127.0.0.1:3000转发至本地的127.0.0.1:3000，提供给配套前端使用
+提供给配套前端使用: https://github.com/emVisible/emLLM-front
 
-### 环境切换
+- 服务器的127.0.0.1:3000转发至本地的127.0.0.1:3000
 
-切换至后端统一环境
-```
-conda activate llm_env
-```
 
-切换至后端项目根目录下
-```
-cd ~/travelAssistant/emLLM-back
-```
 
 ### 依赖安装
 
@@ -87,19 +83,18 @@ cd ~/travelAssistant/emLLM-back
   安装插件(vscode)
   SQLite, SQLite3 Editor 
   
-  通过SQLite插件初始化生成.db文件（若需要） 
-  (vscode sqlite创建数据库)vscode中 ctrl + shift + p, 输入sqlite, 选择Open Database
+  通过SQLite插件初始化生成.db文件（若需要，vscode中 ctrl + shift + p, 输入sqlite, 选择Open Database） 
 ```
 
 ```
   安装依赖, 下载速度若过慢请设置pip代理
-  pip install -r requirements.txt
+  
+  > pip install -r requirements.txt
 ```
 
 ```
   配置env:
-  	1. 将.env.example复制并重命名为.env
-  	2. 配置.env私钥、环境、模型路径、文件根路径等
+  	cp .env.example ./.env
 ```
 
 
@@ -110,10 +105,10 @@ cd ~/travelAssistant/emLLM-back
 
 ```
   在项目的根目录下(~/travelAssistant/emLLM-back)， 运行后等待加载，时间可能较长
-  python main.py
+  > python main.py
 ```
 
-能打开swagger文档，则项目启动完毕：
+可查看swagger文档，则项目启动完毕：
 
 ```
 查看swagger后端接口文档
