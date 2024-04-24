@@ -9,6 +9,7 @@ python-dotenv
 
 torch>=1.13.1
 transformers>=4.37.2
+sentence_transformers
 datasets>=2.14.3
 accelerate>=0.27.2
 peft>=0.10.0
@@ -24,3 +25,4 @@ sse-starlette
 matplotlib
 fire
 galore-torch
+loguru

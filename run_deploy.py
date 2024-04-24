@@ -7,8 +7,6 @@ from time import sleep
 from sys import executable, argv
 from subprocess import call
 from os import system, _exit
-import pyautogui
-
 from run_crawl import crawl
 
 
